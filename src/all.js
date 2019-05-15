@@ -131,10 +131,7 @@ class AllBot {
   respondToAtAll(res) {
     // Select the longer of the two options.
     // TODO: Maybe combine them?
-    const text =
-      res.match[0].length > res.match[1].length ? res.match[0] : res.match[1];
-
-    text = "actually, it's milk";
+    const text = "actually, it's milk";
 
     // The message for use in GroupMe API
     const message = {
