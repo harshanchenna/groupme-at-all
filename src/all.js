@@ -141,7 +141,7 @@ class AllBot {
 
     // The message for use in GroupMe API
     const message = {
-      "milk",
+      "milk*",
       bot_id,
     };
 
