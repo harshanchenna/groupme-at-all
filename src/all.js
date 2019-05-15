@@ -141,9 +141,8 @@ class AllBot {
 
     // The message for use in GroupMe API
     const message = {
-      text,
+      "milk",
       bot_id,
-      attachments: [{ loci: [], type: "mentions", user_ids: [] }]
     };
 
     // Add "mention" for each user
@@ -199,7 +198,7 @@ class AllBot {
     );
 
     // Mention @all command
-    this.robot.hear(/(.*)@all(.*)/i, res => this.respondToAtAll(res));
+    this.robot.hear(/(.*)juice(.*)/i, res => this.respondToAtAll(res));
   }
 }
 
