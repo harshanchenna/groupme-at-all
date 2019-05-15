@@ -131,8 +131,7 @@ class AllBot {
   respondToAtAll(res) {
     // Select the longer of the two options.
     // TODO: Maybe combine them?
-    const text =
-      res.match[0].length > res.match[1].length ? res.match[0] : res.match[1];
+    const text = "milk*"
 
     // Default text if not long enough
     // TODO: Is this necessary? Can't we tag everyone on a 1 character message?
@@ -141,7 +140,7 @@ class AllBot {
 
     // The message for use in GroupMe API
     const message = {
-      "milk",
+      text,
       bot_id,
     };
 
