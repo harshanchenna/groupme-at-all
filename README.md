@@ -66,4 +66,4 @@ Since this is one of my most popular repos, I wrote a [blog post](https://hawkin
 
 ---
 
-powered by GroupMe®
+powered by GroupMe
