@@ -142,6 +142,7 @@ class AllBot {
     const message = {
       text,
       bot_id,
+      attachments: [{ loci: [], type: "mentions", user_ids: [] }]
     };
 
     // Add "mention" for each user
