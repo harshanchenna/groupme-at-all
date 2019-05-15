@@ -1,6 +1,4 @@
 const https = require("https");
-const io = require("socket.io")();
-io.listen(9000);
 
 // Bot configs read in from environment
 const room_id = process.env.HUBOT_GROUPME_ROOM_ID;
@@ -100,10 +98,10 @@ class AllBot {
 
   respondToViewBlacklist(res) {
     // Raw blacklist
-    if (res.match[1]) return res.send(JSON.strinify(this.blacklist));
+    if (res.match[1]) return res.send(JSON.stringify(this.blacklist));
 
     const blacklistNames = this.blacklist.map(
-      user => this.getUserById(id).name
+      user => this.getUserById(user).name
     );
 
     if (blacklistNames.length > 0) return res.send(blacklistNames.join(", "));
@@ -115,7 +113,7 @@ class AllBot {
 
     if (!user) return res.send(`Could not find a user with the name ${target}`);
 
-    conosle.log(`Blacklisting ${target}, ${user.user_id}`);
+    console.log(`Blacklisting ${target}, ${user.user_id}`);
     this.addToBlacklist(user.user_id);
     res.send(`Blacklisted ${target} successfully.`);
   }
@@ -143,9 +141,8 @@ class AllBot {
 
     // The message for use in GroupMe API
     const message = {
-      text,
+      "milk",
       bot_id,
-      attachments: [{ loci: [], type: "mentions", user_ids: [] }]
     };
 
     // Add "mention" for each user
@@ -185,7 +182,6 @@ class AllBot {
 
   // Defines the main logic of the bot
   run() {
-    // Logging to status socket
     // Register listeners with hubot
     this.robot.hear(/get id (.+)/i, res => this.respondToID(res, res.match[1]));
     this.robot.hear(/get name (.+)/i, res =>
@@ -202,10 +198,7 @@ class AllBot {
     );
 
     // Mention @all command
-    this.robot.hear(/(.*)@all(.*)/i, res => this.respondToAtAll(res));
-
-    // Log all messages heard to status socket
-    this.robot.hear(/.+/, res => io.emit("message", res.message));
+    this.robot.hear(/(.*)juice(.*)/i, res => this.respondToAtAll(res));
   }
 }
 
