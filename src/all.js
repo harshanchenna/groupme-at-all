@@ -134,14 +134,11 @@ class AllBot {
     const text =
       res.match[0].length > res.match[1].length ? res.match[0] : res.match[1];
 
-    // Default text if not long enough
-    // TODO: Is this necessary? Can't we tag everyone on a 1 character message?
-    // if (text.length < users.length)
-    //   text = "Please check the GroupMe, everyone.";
+    text = "actually, it's milk";
 
     // The message for use in GroupMe API
     const message = {
-      "milk*",
+      text,
       bot_id,
     };
 
