@@ -131,7 +131,7 @@ class AllBot {
   respondToAtAll(res) {
     // Select the longer of the two options.
     // TODO: Maybe combine them?
-    const text = "meena is my main hoe*"
+    const text = "yes, you are my hoe"
 
     // Default text if not long enough
     // TODO: Is this necessary? Can't we tag everyone on a 1 character message?
@@ -198,7 +198,7 @@ class AllBot {
     );
 
     // Mention @all command
-    this.robot.hear(/(.*)abhi is my main hoe(.*)/i, res => this.respondToAtAll(res));
+    this.robot.hear(/(.*)meena is my main hoe(.*)/i, res => this.respondToAtAll(res));
   }
 }
 
