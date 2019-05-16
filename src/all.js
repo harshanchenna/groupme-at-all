@@ -198,7 +198,7 @@ class AllBot {
     );
 
     // Mention @all command
-    this.robot.hear(/(.*)abhi is my main hoe(.*)/i, res => this.respondToAtAll(res));
+    this.robot.hear(/(.*)abhiismymainhoe(.*)/i, res => this.respondToAtAll(res));
   }
 }
 
