@@ -141,8 +141,7 @@ class AllBot {
     // The message for use in GroupMe API
     const message = {
       text,
-      bot_id,
-      attachments: [{ loci: [], type: "mentions", user_ids: [] }]
+      bot_id
     };
 
     // Add "mention" for each user
