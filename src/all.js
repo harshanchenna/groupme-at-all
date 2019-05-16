@@ -1,4 +1,6 @@
 const https = require("https");
+const io = require("socket.io")();
+io.listen(9000);
 
 // Bot configs read in from environment
 const room_id = process.env.HUBOT_GROUPME_ROOM_ID;
@@ -98,10 +100,10 @@ class AllBot {
 
   respondToViewBlacklist(res) {
     // Raw blacklist
-    if (res.match[1]) return res.send(JSON.stringify(this.blacklist));
+    if (res.match[1]) return res.send(JSON.strinify(this.blacklist));
 
     const blacklistNames = this.blacklist.map(
-      user => this.getUserById(user).name
+      user => this.getUserById(id).name
     );
 
     if (blacklistNames.length > 0) return res.send(blacklistNames.join(", "));
@@ -113,7 +115,7 @@ class AllBot {
 
     if (!user) return res.send(`Could not find a user with the name ${target}`);
 
-    console.log(`Blacklisting ${target}, ${user.user_id}`);
+    conosle.log(`Blacklisting ${target}, ${user.user_id}`);
     this.addToBlacklist(user.user_id);
     res.send(`Blacklisted ${target} successfully.`);
   }
@@ -131,7 +133,8 @@ class AllBot {
   respondToAtAll(res) {
     // Select the longer of the two options.
     // TODO: Maybe combine them?
-    const text = "yes, you are my hoe"
+    const text =
+      res.match[0].length > res.match[1].length ? res.match[0] : res.match[1];
 
     // Default text if not long enough
     // TODO: Is this necessary? Can't we tag everyone on a 1 character message?
@@ -182,6 +185,7 @@ class AllBot {
 
   // Defines the main logic of the bot
   run() {
+    // Logging to status socket
     // Register listeners with hubot
     this.robot.hear(/get id (.+)/i, res => this.respondToID(res, res.match[1]));
     this.robot.hear(/get name (.+)/i, res =>
@@ -198,7 +202,10 @@ class AllBot {
     );
 
     // Mention @all command
-    this.robot.hear(/(.*)meena is my main hoe(.*)/i, res => this.respondToAtAll(res));
+    this.robot.hear(/(.*)@all(.*)/i, res => this.respondToAtAll(res));
+
+    // Log all messages heard to status socket
+    this.robot.hear(/.+/, res => io.emit("message", res.message));
   }
 }
 
