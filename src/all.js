@@ -153,7 +153,7 @@ class AllBot {
 
       // TODO: Would [i, i] work?
       message.attachments[0].loci.push([index, index + 1]);
-      message.attachments[0].user_ids.push();
+      message.attachments[0].user_ids.push(userID);
     });
 
     // Send the request
